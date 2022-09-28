@@ -36,7 +36,9 @@ public class TodoListController {
     }
 
     @PostMapping("/list")
-    public void addTodoList(@RequestParam("item_text") String input) {
+    public String addTodoList(@RequestParam("item_text") String input) {
         todoListService.addTodoItem(new TodoItem(input));
+        
+        return "redirect:/list";
     }
 }
