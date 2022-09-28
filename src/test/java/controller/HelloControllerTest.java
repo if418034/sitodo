@@ -1,5 +1,5 @@
 package controller;
-
+// New imports
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MockMvc;
@@ -10,16 +10,20 @@ import static org.springframework.http.MediaType.TEXT_HTML;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-
+// New annotation
 @WebMvcTest(HelloController.class)
 class HelloControllerTest {
 
+    // New instance variable
     @Autowired
     private MockMvc mockMvc;
 
     @Test
     void showHello_ok() {
-        //
+        HelloController helloController = new HelloController();
+        String result = helloController.showHello();
+
+        assertEquals("hello", result);
     }
 
     @Test
