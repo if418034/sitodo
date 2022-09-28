@@ -10,6 +10,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -18,6 +19,7 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.springframework.http.MediaType.TEXT_HTML;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(TodoListController.class)
@@ -63,6 +65,16 @@ public class TodoListControllerTest {
                 content().contentTypeCompatibleWith(TEXT_HTML),
                 content().encoding(UTF_8),
                 content().string(containsString("Buy milk"))
+        );
+    }
+
+    @Test
+    void addTodoList_withSampleData_ok() throws Exception {
+        TodoItem mockTodoItem = new TodoItem("Cook something");
+        when(todoListService.addTodoItem(mockTodoItem)).thenReturn(mockTodoItem);
+
+        mockMvc.perform(post("/list").param("item_text", "text")).andExpectAll(
+                status().is3xxRedirection()
         );
     }
 }
