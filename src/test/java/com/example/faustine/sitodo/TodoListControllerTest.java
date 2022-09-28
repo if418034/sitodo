@@ -15,10 +15,9 @@ import java.util.List;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.springframework.http.MediaType.TEXT_HTML;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(TodoListController.class)
@@ -76,4 +75,15 @@ public class TodoListControllerTest {
                 status().is3xxRedirection()
         );
     }
+
+    @Test
+    void deleteTodoList_withSampleData_ok() throws Exception {
+        TodoItem mockTodoItem = new TodoItem("Drink something");
+        when(todoListService.deleteTodoItem(mockTodoItem.getId())).thenReturn(List.of(mockTodoItem));
+
+        mockMvc.perform(delete("/list/{id}", 1)).andExpectAll(
+                status().is3xxRedirection()
+        );
+    }
+
 }

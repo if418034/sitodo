@@ -24,4 +24,10 @@ public class TodoListService {
     public List<TodoItem> getTodoItems() {
         return (List<TodoItem>) todoListRepository.findAll();
     }
+
+    public List<TodoItem> deleteTodoItem(Long id) {
+        todoListRepository.deleteById(id);
+
+        return (List<TodoItem>) todoListRepository.findAll();
+    }
 }

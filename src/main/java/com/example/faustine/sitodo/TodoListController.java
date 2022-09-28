@@ -6,10 +6,7 @@ import com.example.faustine.sitodo.service.TodoListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -37,6 +34,13 @@ public class TodoListController {
     public String addTodoList(@RequestParam("item_text") String input) {
         todoListService.addTodoItem(new TodoItem(input));
         
+        return "redirect:/list";
+    }
+
+    @DeleteMapping("/list/{id}")
+    public String deleteTodoList(@PathVariable long id) {
+        todoListService.deleteTodoItem(id);
+
         return "redirect:/list";
     }
 }
