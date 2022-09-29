@@ -28,7 +28,11 @@
         <tr th:each="item : ${todoList}">
             <td th:text="${item.id}">1</td>
             <td th:text="${item.title}">Cook rice</td>
-            <td th:text="${item.finished} ? 'Finished' : 'Not Finished'">Not Finished</td>
+            <td th:text="${item.finished} ? 'Finished' : 'Not Finished'">
+                <a href="/list/{id}">
+                Not Finished
+                </a>
+            </td>
             <td>
                 <a href="/list/${item.id}">
                     Delete

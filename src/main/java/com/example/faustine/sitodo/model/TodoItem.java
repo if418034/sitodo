@@ -22,9 +22,4 @@ public class TodoItem {
     public TodoItem(String title) {
         this.title = title;
     }
-
-    public TodoItem(Long id, String title) {
-        this.id = id;
-        this.title = title;
-    }
 }
